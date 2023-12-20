@@ -1,37 +1,23 @@
-from be.model import store
+import bookstore.database_setup as ds
 
+def user_id_exist(user_id):
+    cursor = ds.session.query(ds.User).filter(ds.User.user_id == user_id).first()
+    if (cursor is None):
+        return False
+    else:
+        return True
 
-class DBConn:
-    def __init__(self):
-        self.conn = store.get_db_conn()
+def book_id_exist(store_id, book_id):
+    cursor = ds.session.query(ds.StoreDetail).filter(ds.StoreDetail.store_id == store_id,
+                                                ds.StoreDetail.book_id == book_id).first()
+    if (cursor is None):
+        return False
+    else:
+        return True
 
-    def user_id_exist(self, user_id):
-        cursor = self.conn.execute(
-            "SELECT user_id FROM user WHERE user_id = ?;", (user_id,)
-        )
-        row = cursor.fetchone()
-        if row is None:
-            return False
-        else:
-            return True
-
-    def book_id_exist(self, store_id, book_id):
-        cursor = self.conn.execute(
-            "SELECT book_id FROM store WHERE store_id = ? AND book_id = ?;",
-            (store_id, book_id),
-        )
-        row = cursor.fetchone()
-        if row is None:
-            return False
-        else:
-            return True
-
-    def store_id_exist(self, store_id):
-        cursor = self.conn.execute(
-            "SELECT store_id FROM user_store WHERE store_id = ?;", (store_id,)
-        )
-        row = cursor.fetchone()
-        if row is None:
-            return False
-        else:
-            return True
+def store_id_exist(store_id):
+    cursor = ds.session.query(ds.Store).filter(ds.Store.store_id == store_id).first()
+    if (cursor is None):
+        return False
+    else:
+        return True
