@@ -1,6 +1,6 @@
 import pytest
 
-from fe.access.new_seller import register_new_seller
+from bookstore.fe.access.new_seller import register_new_seller
 import uuid
 
 

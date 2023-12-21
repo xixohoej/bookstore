@@ -1,9 +1,9 @@
 import pytest
 
-from fe.access.buyer import Buyer
-from fe.test.gen_book_data import GenBook
-from fe.access.new_buyer import register_new_buyer
-from fe.access.book import Book
+from bookstore.fe.access.buyer import Buyer
+from bookstore.fe.test.gen_book_data import GenBook
+from bookstore.fe.access.new_buyer import register_new_buyer
+from bookstore.fe.access.book import Book
 import uuid
 
 
