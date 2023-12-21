@@ -1,7 +1,7 @@
 import requests
 import simplejson
 from urllib.parse import urljoin
-from fe.access.auth import Auth
+from bookstore.fe.access.auth import Auth
 
 
 class Buyer:
