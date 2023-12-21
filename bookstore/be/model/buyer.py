@@ -4,7 +4,7 @@ from bookstore.be.model.db_conn import *
 from bookstore.be.model import error
 
 
-class Buyer():
+class Buyer(DBConn):
     def __init__(self):
         self.cur = session
 
