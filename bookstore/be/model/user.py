@@ -5,9 +5,9 @@ import logging
 import time
 import sqlalchemy
 from sqlalchemy.exc import SQLAlchemyError
-from be.model import error
-from be.db_conn import User as aUser
-from be.db_conn import *
+from bookstore.be.model import error
+from bookstore.be.model.db_conn import User as aUser
+from bookstore.be.model.db_conn import *
 import warnings
 warnings.filterwarnings("ignore")
 
