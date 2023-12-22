@@ -1,5 +1,5 @@
 import re
-from sqlalchemy import create_engine, text, Column, String, Integer, ForeignKey, Text, DateTime, LargeBinary, select
+from sqlalchemy import create_engine, text, Column, String, Integer, ForeignKey, Text, DateTime, LargeBinary
 from sqlalchemy.orm import declarative_base, sessionmaker
 from typing import List, Optional, Union
 from datetime import datetime
@@ -124,7 +124,7 @@ Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
 # 插入 book 表的数据
-conn = sqlite.connect("fe/data/book.db")
+conn = sqlite.connect("bookstore/fe/data/book.db")
 cursor = conn.execute("SELECT id, title, author, publisher, original_title, "
                       "translator, pub_year, pages, price, currency_unit, "
                       "binding, isbn, author_intro, book_intro, content, tags, picture FROM book ORDER BY id")

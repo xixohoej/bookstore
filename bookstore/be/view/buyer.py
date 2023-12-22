@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import request
 from flask import jsonify
-from be.model.buyer import Buyer
+from be.model.buyer import Buyer 
 
 bp_buyer = Blueprint("buyer", __name__, url_prefix="/buyer")
 
@@ -16,7 +16,7 @@ def new_order():
         book_id = book.get("id")
         count = book.get("count")
         id_and_count.append((book_id, count))
-
+    # print(user_id, store_id, books)
     b = Buyer()
     code, message, order_id = b.new_order(user_id, store_id, id_and_count)
     return jsonify({"message": message, "order_id": order_id}), code
@@ -40,3 +40,31 @@ def add_funds():
     b = Buyer()
     code, message = b.add_funds(user_id, password, add_value)
     return jsonify({"message": message}), code
+
+
+@bp_buyer.route("/receive_books", methods=["POST"])
+def receive_books():
+    user_id: str = request.json.get("user_id")
+    order_id: str = request.json.get("order_id")
+    b = Buyer()
+    code, message = b.receive_books(user_id, order_id)
+    return jsonify({"message": message}), code
+
+
+@bp_buyer.route("/close_order", methods=["POST"])
+def close_order():
+    user_id: str = request.json.get("user_id")
+    order_id: str = request.json.get("order_id")
+    password: str = request.json.get("password")
+    b = Buyer()
+    code, message = b.close_order(user_id, password, order_id)
+    return jsonify({"message": message}), code
+
+
+@bp_buyer.route("/search_order", methods=["POST"])
+def search_order():
+    user_id: str = request.json.get("user_id")
+    password: str = request.json.get("password")
+    b = Buyer()
+    code, message, historys = b.search_order(user_id, password)
+    return jsonify({"message": message, "historys": historys}), code

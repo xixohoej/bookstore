@@ -2,8 +2,8 @@ import time
 
 import pytest
 
-from bookstore.fe.access import auth
-from bookstore.fe import conf
+from fe.access import auth
+from fe import conf
 
 
 class TestLogin:

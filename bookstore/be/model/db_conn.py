@@ -1,4 +1,5 @@
-from bookstore.database_setup import *
+from be.data_setup import *
+
 def user_id_exist(user_id):
     cursor = session.query(User).filter(User.user_id == user_id).first()
     if cursor is None:

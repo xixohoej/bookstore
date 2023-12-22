@@ -9,7 +9,7 @@ class Session(threading.Thread):
     def __init__(self, wl: Workload):
         threading.Thread.__init__(self)
         self.workload = wl
-        self.new_order_request = []
+        self.new_order_request = [] 
         self.payment_request = []
         self.payment_i = 0
         self.new_order_i = 0
@@ -39,17 +39,9 @@ class Session(threading.Thread):
                 self.new_order_ok = self.new_order_ok + 1
                 payment = Payment(new_order.buyer, order_id)
                 self.payment_request.append(payment)
-            if self.new_order_i % 100 or self.new_order_i == len(
-                self.new_order_request
-            ):
-                self.workload.update_stat(
-                    self.new_order_i,
-                    self.payment_i,
-                    self.new_order_ok,
-                    self.payment_ok,
-                    self.time_new_order,
-                    self.time_payment,
-                )
+            if self.new_order_i % 100 or self.new_order_i == len(self.new_order_request):
+                self.workload.update_stat(self.new_order_i, self.payment_i, self.new_order_ok, self.payment_ok,
+                                          self.time_new_order, self.time_payment)
                 for payment in self.payment_request:
                     before = time.time()
                     ok = payment.run()

@@ -1,6 +1,6 @@
 import pytest
 import uuid
-from bookstore.fe.access.new_buyer import register_new_buyer
+from fe.access.new_buyer import register_new_buyer
 
 
 class TestAddFunds:

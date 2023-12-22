@@ -1,10 +1,10 @@
 import re
-from sqlalchemy import create_engine, text, Column, String, Integer, ForeignKey, Text, DateTime, LargeBinary, select
+from sqlalchemy import create_engine, text, Column, String, Integer, ForeignKey, Text, DateTime, LargeBinary
 from sqlalchemy.orm import declarative_base, sessionmaker
 from typing import List, Optional, Union
 from datetime import datetime
 import jieba.analyse
-import sqlite3 as sqlite
+import sqlite3 as sqlite 
 
 Base = declarative_base()
 DATABASE_URL = "postgresql://postgres:makimanoinu@localhost:5432/bookstore"
@@ -123,7 +123,7 @@ class BookInit:
 Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
 
-# 插入 book 表的数据
+# 鎻掑叆 book 琛ㄧ殑鏁版嵁
 conn = sqlite.connect("fe/data/book.db")
 cursor = conn.execute("SELECT id, title, author, publisher, original_title, "
                       "translator, pub_year, pages, price, currency_unit, "
@@ -139,7 +139,7 @@ for row in rows:
 session.bulk_insert_mappings(Book, book_objects)
 session.commit()
 
-# 插入 SearchTags 表的数据
+# 鎻掑叆 SearchTags 琛ㄧ殑鏁版嵁
 rows = session.execute(text("SELECT book_id, tags FROM book;")).fetchall()
 for row in rows[1:]:
     tags = [tag.strip() for tag in row.tags.replace("'", "").replace("[", "").replace("]", "").split(", ") if tag.strip()]
@@ -152,7 +152,7 @@ for row in rows[1:]:
         except Exception as e:
             print(f"Error inserting into SearchTags: {e}")
 
-# 插入 SearchAuthor 表的数据
+# 鎻掑叆 SearchAuthor 琛ㄧ殑鏁版嵁
 rows = session.execute(text("SELECT book_id, author FROM book;")).fetchall()
 for i in rows:
     tmp = i.author
@@ -172,7 +172,7 @@ for i in rows:
         except Exception as e:
             print(f"Error inserting into SearchAuthor: {e}")
 
-# 插入 SearchTitle 表的数据
+# 鎻掑叆 SearchTitle 琛ㄧ殑鏁版嵁
 rows = session.execute(text("SELECT book_id, title FROM book;")).fetchall()
 for i in rows:
     tmp = i.title
@@ -191,7 +191,7 @@ for i in rows:
             except Exception as e:
                 print(f"Error inserting into SearchTitle: {e}")
 
-# 插入 SearchBookIntro 表的数据
+# 鎻掑叆 SearchBookIntro 琛ㄧ殑鏁版嵁
 rows = session.execute(text("SELECT book_id, book_intro FROM book;")).fetchall()
 for i in rows:
     tmp = i.book_intro

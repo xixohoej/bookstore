@@ -1,9 +1,14 @@
+datetime
+jieba
 simplejson
+psycopg2
+sqlalchemy
 lxml
 codecov
 coverage
 flask
-pre - commit
+pre-commit
 pytest
 PyJWT
 requests
+

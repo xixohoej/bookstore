@@ -2,7 +2,7 @@
 
 from lxml import etree
 import sqlite3
-import re
+import re 
 import requests
 import random
 import time
@@ -59,7 +59,7 @@ user_agent = [
     "NOKIA5700/ UCWEB7.0.2.37/28/999",
     "Openwave/ UCWEB7.0.2.37/28/999",
     "Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/999",
-    # iPhone 6：
+    # iPhone 6＄1�7
     "Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 "
     "Mobile/10A5376e Safari/8536.25",
 ]
@@ -331,7 +331,7 @@ class Scraper:
             e_a = d.get("a")
             text.strip()
             text.strip(":")
-            if label == "作者" or label == "译者":
+            if label == "作��1�7" or label == "译��1�7":
                 a = span.xpath("a/text()")
                 if text == "" and len(a) == 1:
                     text = a[0].strip()
@@ -391,11 +391,11 @@ class Scraper:
                 (
                     book_id,
                     title,
-                    book_info.get("作者"),
-                    book_info.get("出版社"),
-                    book_info.get("原作名"),
-                    book_info.get("译者"),
-                    book_info.get("出版年"),
+                    book_info.get("作��1�7"),
+                    book_info.get("出版礄1�7"),
+                    book_info.get("原作各1�7"),
+                    book_info.get("译��1�7"),
+                    book_info.get("出版幄1�7"),
                     pages,
                     price,
                     unit,

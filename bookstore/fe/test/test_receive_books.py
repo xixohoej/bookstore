@@ -2,9 +2,9 @@ import time
 import uuid
 import pytest
 
-from bookstore.fe.test.gen_book_data import GenBook
-from bookstore.fe.access.new_buyer import register_new_buyer
-from bookstore.fe.access.book import Book
+from fe.test.gen_book_data import GenBook
+from fe.access.new_buyer import register_new_buyer
+from fe.access.book import Book
 
 
 class TestReceiveBook:

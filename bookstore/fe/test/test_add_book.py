@@ -1,7 +1,7 @@
 import pytest
 
-from bookstore.fe.access.new_seller import register_new_seller
-from bookstore.fe.access import book
+from fe.access.new_seller import register_new_seller
+from fe.access import book
 import uuid
 
 
@@ -48,3 +48,4 @@ class TestAddBook:
             self.seller.seller_id = self.seller.seller_id + "_x"
             code = self.seller.add_book(self.store_id, 0, b)
             assert code != 200
+

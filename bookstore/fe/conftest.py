@@ -7,7 +7,7 @@ from fe import conf
 thread: threading.Thread = None
 
 
-# 修改这里启动后端程序，如果不需要可删除这行代码
+# 修改这里启动后端程序，如果不霢�要可删除这行代码
 def run_backend():
     # rewrite this if rewrite backend
     serve.be_run()

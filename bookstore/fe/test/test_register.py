@@ -1,16 +1,17 @@
 import time
+import uuid
 
 import pytest
 
-from bookstore.fe.access import auth
-from bookstore.fe import conf
+from fe.access import auth
+from fe import conf
 
 
-class TestRegister:
+class TestRegister: 
     @pytest.fixture(autouse=True)
     def pre_run_initialization(self):
-        self.user_id = "test_register_user_{}".format(time.time())
-        self.password = "test_register_password_{}".format(time.time())
+        self.user_id = "test_register_user_{}".format(str(uuid.uuid1()))
+        self.password = "test_register_password_{}".format(str(uuid.uuid1()))
         self.auth = auth.Auth(conf.URL)
         yield
 
