@@ -9,10 +9,10 @@ from fe.access.buyer import Buyer
 from fe import conf
 
 logging.basicConfig(
-    level=logging.INFO,  # 设置日志的显示级别为最低一级
+    level=logging.INFO,  # 设置日志的显示级别为朢�低一纄1�7
     filename="logger.log",  # 设置日志的显示文件名
     # filemode='w',  # 设置日志的写入方式为追加
-    # format='%(asctime)s %(filename)s [%(lineno)d] %(message)s',  # 设置一个输出模板格式
+    # format='%(asctime)s %(filename)s [%(lineno)d] %(message)s',  # 设置丢�个输出模板格弄1�7
 )
 # logging.getLogger().setLevel(logging.INFO)
 
@@ -120,8 +120,8 @@ class Workload:
         book_id_and_count = []
         book_temp = []
         for i in range(0, books):
-            book_no = int(random.uniform(0, len(self.book_ids) - 1))
-            book_id = self.book_ids[book_no]
+            book_no = int(random.uniform(0, len(self.book_ids[store_id]) - 1))
+            book_id = self.book_ids[store_id][book_no]
             if book_id in book_temp:
                 continue
             else:
@@ -135,7 +135,7 @@ class Workload:
     def update_stat(self, n_new_order, n_payment,
                     n_new_order_ok, n_payment_ok,
                     time_new_order, time_payment):
-        # 获取当前并发数
+        # 获取当前并发敄1�7
         thread_num = len(threading.enumerate())
         # 加锁
         self.lock.acquire()
@@ -145,34 +145,34 @@ class Workload:
         self.n_payment_ok = self.n_payment_ok + n_payment_ok
         self.time_new_order = self.time_new_order + time_new_order
         self.time_payment = self.time_payment + time_payment
-        # 计算这段时间内新创建订单的总数目
+        # 计算这段时间内新创建订单的��数盄1�7
         n_new_order_diff = self.n_new_order - self.n_new_order_past
-        # 计算这段时间内新付款订单的总数目
+        # 计算这段时间内新付款订单的��数盄1�7
         n_payment_diff = self.n_payment - self.n_payment_past
         # print(self.n_payment, self.n_new_order)
         if self.n_payment != 0 and self.n_new_order != 0 \
                 and (self.time_payment + self.time_new_order):
-            # TPS_C(吞吐量):成功创建订单数量/(提交订单时间/提交订单并发数 + 提交付款订单时间/提交付款订单并发数)
-            # NO=OK:新创建订单数量
+            # TPS_C(吞吐釄1�7):成功创建订单数量/(提交订单时间/提交订单并发敄1�7 + 提交付款订单时间/提交付款订单并发敄1�7)
+            # NO=OK:新创建订单数釄1�7
             # Thread_num:以新提交订单的数量作为并发数(这一次的TOTAL-上一次的TOTAL)
-            # TOTAL:总提交订单数量
-            # LATENCY:提交订单时间/处理订单笔数(只考虑该线程延迟，未考虑并发)
-            # P=OK:新创建付款订单数量
+            # TOTAL:总提交订单数釄1�7
+            # LATENCY:提交订单时间/处理订单笔数(只��虑该线程延迟，未��虑并发)
+            # P=OK:新创建付款订单数釄1�7
             # Thread_num:以新提交付款订单的数量作为并发数(这一次的TOTAL-上一次的TOTAL)
-            # TOTAL:总付款提交订单数量
-            # LATENCY:提交付款订单时间/处理付款订单笔数(只考虑该线程延迟，未考虑并发)
+            # TOTAL:总付款提交订单数釄1�7
+            # LATENCY:提交付款订单时间/处理付款订单笔数(只��虑该线程延迟，未��虑并发)
             logging.info(
                 "TPS_C={}, NO=OK:{} Thread_num:{} TOTAL:{} LATENCY:{} , P=OK:{} Thread_num:{} TOTAL:{} LATENCY:{}".format(
                     int(self.n_new_order_ok / (
                                 self.time_payment / n_payment_diff + self.time_new_order / n_new_order_diff)),
-                    # 吞吐量:完成订单数/((付款所用时间+订单所用时间)/并发数)
+                    # 吞吐釄1�7:完成订单敄1�7/((付款扢�用时闄1�7+订单扢�用时闄1�7)/并发敄1�7)
                     self.n_new_order_ok, n_new_order_diff, self.n_new_order, self.time_new_order / self.n_new_order,
-                    # 订单延迟:(创建订单所用时间/并发数)/新创建订单数
+                    # 订单延迟:(创建订单扢�用时闄1�7/并发敄1�7)/新创建订单数
                     self.n_payment_ok, n_payment_diff, self.n_payment, self.time_payment / self.n_payment
-                    # 付款延迟:(付款所用时间/并发数)/付款订单数
+                    # 付款延迟:(付款扢�用时闄1�7/并发敄1�7)/付款订单敄1�7
                 ))
         self.lock.release()
-        # 旧值更新为新值，便于下一轮计算
+        # 旧��更新为新��，便于下一轮计箄1�7
         self.n_new_order_past = self.n_new_order
         self.n_payment_past = self.n_payment
         self.n_new_order_ok_past = self.n_new_order_ok
